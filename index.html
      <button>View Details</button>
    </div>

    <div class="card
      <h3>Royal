@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Haven Realty</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Prime Haven Realty</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#properties">Properties</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Exceptional Homes. Trusted Guidance. Lasting Value.</h2>
+  <p>
+    Discover premium properties and investment opportunities with a real estate partner you can trust.
+  </p>
+  <button>Schedule A Viewing</button>
+</section>
+
+<section id="properties">
+  <h2>Featured Properties</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Ocean View Residence</h3>
+      <p>Lagos, Nigeria</p>
+      <p>5 Bedrooms • Luxury Finish</p>
+      <strong>₦250 Million</strong>
+      <button>View Details</button>
+    </div>
+
+    <div class="card">
+      <h3>Royal Gardens Apartment</h3>
+      <p>Abuja, Nigeria</p>
+      <p>3 Bedrooms • Secure Estate</p>
+      <strong>₦85 Million</strong>
+      <button>View Details</button>
+    </div>
+
+    <div class="card">
+      <h3>Executive Villa</h3>
+      <p>Port Harcourt, Nigeria</p>
+      <p>6 Bedrooms • Smart Home</p>
+      <strong>₦300 Million</strong>
+      <button>View Details</button>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+<h2>Contact Prime Haven Realty</h2>
+
+<form>
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Your Email">
+<textarea placeholder="Tell us what property you need"></textarea>
+<button type="submit">Send Enquiry</button>
+</form>
+
+</section>
+
+<footer>
+<p>© 2026 Prime Haven Realty</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
