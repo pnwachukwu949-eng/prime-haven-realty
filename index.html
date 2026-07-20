@@ -1,80 +1,675 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prime Haven Realty</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Haven Realty — Exceptional Homes, Trusted Guidance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12141C;
+    --ink-2:#1B1E29;
+    --ink-3:#252938;
+    --ivory:#F6F1E7;
+    --ivory-dim:#E9E2D2;
+    --brass:#C0913F;
+    --brass-bright:#D8AC5C;
+    --clay:#B25D3B;
+    --sage:#5B6B52;
+    --muted:#9098A6;
+    --line: rgba(198,178,140,0.22);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--ivory);
+    font-family:'Manrope', sans-serif;
+    line-height:1.5;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
 
+  /* ---------- reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,20,28,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 0;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem;
+    color:var(--ivory);
+  }
+  .brand .mark{
+    width:30px; height:30px; flex-shrink:0;
+  }
+  .navlinks{display:flex; gap:36px; align-items:center;}
+  .navlinks a{
+    font-size:0.86rem; text-transform:uppercase; letter-spacing:0.09em;
+    color:var(--muted); transition:color 0.2s ease;
+    position:relative; padding-bottom:4px;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--ivory);}
+  .navlinks a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--brass); transition:width 0.25s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .navlinks .cta-small{
+    color:var(--ink); background:var(--brass); padding:9px 18px;
+    border-radius:2px; letter-spacing:0.08em; font-weight:600;
+  }
+  .navlinks .cta-small::after{display:none;}
+  .navlinks .cta-small:hover{background:var(--brass-bright); color:var(--ink);}
+  .navtoggle{display:none; background:none; border:none; color:var(--ivory); font-size:1.6rem; cursor:pointer;}
+  @media (max-width:800px){
+    .navlinks{
+      position:fixed; top:73px; left:0; right:0; bottom:0;
+      background:var(--ink); flex-direction:column; justify-content:flex-start;
+      padding:40px 32px; gap:28px;
+      transform:translateX(100%); transition:transform 0.3s ease;
+    }
+    .navlinks.open{transform:translateX(0);}
+    .navtoggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:110px 0 90px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:60px; align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .eyebrow{
+    display:flex; align-items:center; gap:10px;
+    font-size:0.78rem; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--brass-bright); margin-bottom:22px;
+  }
+  .eyebrow::before{content:''; width:26px; height:1px; background:var(--brass-bright);}
+  .hero h1{
+    font-size:clamp(2.4rem, 5.2vw, 4rem);
+    line-height:1.05;
+    color:var(--ivory);
+    margin-bottom:24px;
+  }
+  .hero h1 em{font-style:italic; color:var(--brass-bright);}
+  .hero p.lead{
+    color:var(--muted); font-size:1.08rem; max-width:46ch; margin-bottom:36px;
+  }
+  .hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; font-size:0.86rem; font-weight:700;
+    letter-spacing:0.06em; text-transform:uppercase;
+    border-radius:2px; cursor:pointer; border:1px solid transparent;
+    transition:all 0.2s ease;
+  }
+  .btn-primary{background:var(--brass); color:var(--ink);}
+  .btn-primary:hover{background:var(--brass-bright);}
+  .btn-ghost{border-color:var(--line); color:var(--ivory);}
+  .btn-ghost:hover{border-color:var(--brass-bright); color:var(--brass-bright);}
+
+  /* blueprint diagram, signature element */
+  .blueprint{
+    position:relative; aspect-ratio:1/1.05;
+    border:1px solid var(--line); border-radius:2px;
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0/24px 24px,
+      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/24px 24px,
+      var(--ink-2);
+    padding:22px;
+  }
+  .blueprint svg{width:100%; height:100%;}
+  .blueprint .tag{
+    position:absolute; top:18px; left:18px;
+    font-size:0.68rem; color:var(--muted);
+    display:flex; flex-direction:column; gap:2px;
+  }
+  .blueprint .tag b{color:var(--brass-bright); font-size:0.7rem; letter-spacing:0.08em;}
+  .blueprint .stamp{
+    position:absolute; bottom:18px; right:18px;
+    border:1px solid var(--brass); color:var(--brass-bright);
+    padding:6px 12px; font-size:0.66rem; letter-spacing:0.12em;
+    transform:rotate(-4deg); border-radius:2px;
+  }
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{
+    border-bottom:1px solid var(--line);
+    padding:34px 0;
+  }
+  .trust-row{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;
+    color:var(--muted); font-size:0.82rem; letter-spacing:0.04em;
+  }
+  .trust-row strong{color:var(--ivory); font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; display:block; margin-bottom:2px;}
+
+  /* ---------- PROPERTIES ---------- */
+  .section{padding:100px 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:24px; margin-bottom:56px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.6rem); color:var(--ivory);}
+  .section-head p{color:var(--muted); max-width:38ch;}
+
+  .prop-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;
+  }
+  @media (max-width:900px){ .prop-grid{grid-template-columns:1fr;} }
+
+  .prop-card{
+    border:1px solid var(--line); border-radius:2px; overflow:hidden;
+    background:var(--ink-2); position:relative;
+    transition:border-color 0.25s ease, transform 0.25s ease;
+  }
+  .prop-card:hover{border-color:var(--brass); transform:translateY(-3px);}
+  .prop-visual{
+    position:relative; aspect-ratio:4/3;
+    background:
+      linear-gradient(rgba(18,20,28,0.15), rgba(18,20,28,0.85)),
+      var(--pattern);
+    display:flex; align-items:center; justify-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .prop-visual svg{width:56%; height:56%; opacity:0.92;}
+  .prop-index{
+    position:absolute; top:14px; left:14px;
+    font-size:0.7rem; color:var(--brass-bright); letter-spacing:0.1em;
+    border:1px solid var(--brass); padding:3px 9px; border-radius:2px;
+    background:rgba(18,20,28,0.6);
+  }
+  .prop-body{padding:24px;}
+  .prop-loc{
+    font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:8px;
+  }
+  .prop-body h3{font-size:1.32rem; color:var(--ivory); margin-bottom:10px;}
+  .prop-specs{
+    display:flex; gap:14px; flex-wrap:wrap; font-size:0.78rem;
+    color:var(--muted); margin-bottom:18px; padding-bottom:18px;
+    border-bottom:1px dashed var(--line);
+  }
+  .prop-price{
+    font-size:1.05rem; color:var(--brass-bright); margin-bottom:16px;
+  }
+  .prop-actions{display:flex; gap:10px;}
+  .link-btn{
+    font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ivory); border-bottom:1px solid var(--brass);
+    padding-bottom:2px; cursor:pointer; background:none; border-top:none; border-left:none; border-right:none;
+    font-family:inherit;
+  }
+  .link-btn:hover{color:var(--brass-bright);}
+
+  /* detail expand panel */
+  .prop-detail{
+    max-height:0; overflow:hidden; transition:max-height 0.4s ease;
+    border-top:1px solid var(--line);
+  }
+  .prop-detail.open{max-height:600px;}
+  .prop-detail-inner{padding:22px 24px 26px; color:var(--muted); font-size:0.92rem;}
+  .prop-detail-inner .feats{
+    list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px 16px;
+    margin:16px 0 20px; padding:0;
+  }
+  .prop-detail-inner .feats li{
+    font-size:0.82rem; padding-left:16px; position:relative;
+  }
+  .prop-detail-inner .feats li::before{
+    content:''; position:absolute; left:0; top:8px; width:7px; height:1px; background:var(--brass);
+  }
+
+  /* ---------- ABOUT / TRUST BLOCK ---------- */
+  .about{
+    background:var(--ivory); color:var(--ink);
+    padding:100px 0;
+  }
+  .about .section-head h2, .about .section-head p{color:var(--ink);}
+  .about .section-head p{color:#5c5646;}
+  .about-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:36px;}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-card{
+    border-top:2px solid var(--clay); padding-top:18px;
+  }
+  .about-card .num{font-family:'IBM Plex Mono',monospace; color:var(--clay); font-size:0.8rem; margin-bottom:10px; display:block;}
+  .about-card h3{font-size:1.15rem; margin-bottom:10px;}
+  .about-card p{color:#5c5646; font-size:0.92rem;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{padding:100px 0;}
+  .contact-grid{display:grid; grid-template-columns:1fr 1.1fr; gap:60px;}
+  @media (max-width:900px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-info h2{font-size:clamp(1.9rem,3.4vw,2.5rem); margin-bottom:18px;}
+  .contact-info p{color:var(--muted); margin-bottom:28px; max-width:40ch;}
+  .contact-detail{margin-bottom:18px;}
+  .contact-detail .k{font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--brass-bright); display:block; margin-bottom:4px;}
+  .contact-detail .v{font-size:1rem;}
+
+  form{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:2px;
+    padding:32px;
+  }
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.09em;
+    color:var(--muted); margin-bottom:8px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%; background:var(--ink); border:1px solid var(--line);
+    color:var(--ivory); padding:12px 14px; font-family:'Manrope',sans-serif;
+    font-size:0.95rem; border-radius:2px; transition:border-color 0.2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--brass);
+  }
+  .field textarea{resize:vertical; min-height:100px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:520px){ .row2{grid-template-columns:1fr;} }
+  .form-note{font-size:0.78rem; color:var(--muted); margin-top:14px;}
+  .form-status{font-size:0.85rem; margin-top:14px; display:none;}
+  .form-status.show{display:block;}
+  .form-status.ok{color:#7FAE7A;}
+  .form-status.err{color:var(--clay);}
+
+  button[type="submit"]{
+    width:100%; border:none; cursor:pointer;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line); padding:40px 0;
+  }
+  .foot-row{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px; color:var(--muted); font-size:0.8rem;
+  }
+  .foot-row a{color:var(--muted);}
+  .foot-row a:hover{color:var(--brass-bright);}
+
+  /* visible keyboard focus */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--brass-bright); outline-offset:2px;
+  }
+</style>
+</head>
 <body>
 
 <header>
-  <h1>Prime Haven Realty</h1>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#properties">Properties</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 30 30" fill="none">
+        <path d="M15 3L27 12V27H3V12L15 3Z" stroke="#C0913F" stroke-width="1.4"/>
+        <path d="M11 27V17H19V27" stroke="#C0913F" stroke-width="1.4"/>
+      </svg>
+      Prime Haven Realty
+    </div>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="navlinks" id="navLinks">
+      <a href="#properties">Properties</a>
+      <a href="#about">Why Prime Haven</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="cta-small">Schedule a Viewing</a>
+    </nav>
+  </div>
 </header>
 
 <section class="hero">
-  <h2>Exceptional Homes. Trusted Guidance. Lasting Value.</h2>
-  <p>
-    Discover premium properties and investment opportunities with a real estate partner you can trust.
-  </p>
-  <button>Schedule A Viewing</button>
-</section>
-
-<section id="properties">
-  <h2>Featured Properties</h2>
-
-  <div class="cards">
-
-    <div class="card">
-      <h3>Ocean View Residence</h3>
-      <p>Lagos, Nigeria</p>
-      <p>5 Bedrooms • Luxury Finish</p>
-      <strong>₦250 Million</strong>
-      <button>View Details</button>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Lagos · Abuja · Port Harcourt</div>
+      <h1>Exceptional homes,<br><em>measured</em> in trust.</h1>
+      <p class="lead">Prime Haven Realty connects discerning buyers with Nigeria's most credible listings — every property vetted, every detail documented, every deal handled with quiet precision.</p>
+      <div class="hero-ctas">
+        <a href="#properties" class="btn btn-primary">View Properties</a>
+        <a href="#contact" class="btn btn-ghost">Schedule a Viewing</a>
+      </div>
     </div>
-
-    <div class="card">
-      <h3>Royal Gardens Apartment</h3>
-      <p>Abuja, Nigeria</p>
-      <p>3 Bedrooms • Secure Estate</p>
-      <strong>₦85 Million</strong>
-      <button>View Details</button>
+    <div class="blueprint" aria-hidden="true">
+      <div class="tag"><b>PH-RESIDENCE / 01</b>Ocean View, Lagos</div>
+      <svg viewBox="0 0 240 260" fill="none">
+        <path d="M30 160L120 90L210 160V230H30V160Z" stroke="#C0913F" stroke-width="1.2"/>
+        <path d="M30 160H210" stroke="#8C6A32" stroke-width="0.8" stroke-dasharray="3 4"/>
+        <path d="M95 230V180H145V230" stroke="#C0913F" stroke-width="1.2"/>
+        <path d="M55 200H75V220H55V200Z" stroke="#8C6A32" stroke-width="0.8"/>
+        <path d="M165 200H185V220H165V200Z" stroke="#8C6A32" stroke-width="0.8"/>
+        <path d="M120 90V60" stroke="#8C6A32" stroke-width="0.8" stroke-dasharray="2 3"/>
+        <circle cx="120" cy="55" r="4" stroke="#C0913F" stroke-width="1"/>
+        <path d="M10 230H230" stroke="#C0913F" stroke-width="1.4"/>
+        <text x="30" y="248" fill="#9098A6" font-size="8" font-family="IBM Plex Mono">18.4m</text>
+        <text x="150" y="248" fill="#9098A6" font-size="8" font-family="IBM Plex Mono">22.0m</text>
+      </svg>
+      <div class="stamp">EST. 2026</div>
     </div>
-
-    <div class="card">
-      <h3>Executive Villa</h3>
-      <p>Port Harcourt, Nigeria</p>
-      <p>6 Bedrooms • Smart Home</p>
-      <strong>₦300 Million</strong>
-      <button>View Details</button>
-    </div>
-
   </div>
 </section>
 
-<section id="contact">
-<h2>Contact Prime Haven Realty</h2>
+<div class="trust">
+  <div class="wrap trust-row">
+    <div><strong>120+</strong>Properties placed</div>
+    <div><strong>3</strong>Cities covered</div>
+    <div><strong>48 hrs</strong>Average response time</div>
+    <div><strong>100%</strong>Verified titles</div>
+  </div>
+</div>
 
-<form>
-<input type="text" placeholder="Your Name">
-<input type="email" placeholder="Your Email">
-<textarea placeholder="Tell us what property you need"></textarea>
-<button type="submit">Send Enquiry</button>
-</form>
+<section class="section" id="properties">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Featured Properties</h2>
+        <p>A curated selection, updated as new listings are verified.</p>
+      </div>
+    </div>
 
+    <div class="prop-grid">
+
+      <!-- Property 1 -->
+      <article class="prop-card">
+        <div class="prop-visual" style="--pattern:linear-gradient(135deg,#1B1E29,#2A2F42)">
+          <span class="prop-index mono">01</span>
+          <svg viewBox="0 0 100 100" fill="none">
+            <path d="M15 60L50 30L85 60V85H15V60Z" stroke="#C0913F" stroke-width="1.3"/>
+            <path d="M40 85V65H60V85" stroke="#C0913F" stroke-width="1.3"/>
+            <path d="M5 62 L95 62" stroke="#B25D3B" stroke-width="1" stroke-dasharray="2 3"/>
+            <circle cx="72" cy="45" r="2.5" fill="#D8AC5C"/>
+          </svg>
+        </div>
+        <div class="prop-body">
+          <div class="prop-loc">Lekki, Lagos</div>
+          <h3>Ocean View Residence</h3>
+          <div class="prop-specs">
+            <span class="mono">5 BD</span>
+            <span class="mono">6 BA</span>
+            <span class="mono">720 sqm</span>
+          </div>
+          <div class="prop-price mono">₦250,000,000</div>
+          <div class="prop-actions">
+            <button class="link-btn" data-toggle="detail-1" aria-expanded="false">View Details</button>
+          </div>
+        </div>
+        <div class="prop-detail" id="detail-1">
+          <div class="prop-detail-inner">
+            <p>A five-bedroom waterfront residence on Lagos's Lekki peninsula, finished with imported marble and full smart-home integration throughout.</p>
+            <ul class="feats">
+              <li>Private beach access</li>
+              <li>Infinity pool</li>
+              <li>Staff quarters (2)</li>
+              <li>24hr estate security</li>
+              <li>Home cinema</li>
+              <li>3-car garage</li>
+            </ul>
+            <button class="link-btn" data-enquire="Ocean View Residence, Lekki (₦250,000,000)">Enquire About This Property →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property 2 -->
+      <article class="prop-card">
+        <div class="prop-visual" style="--pattern:linear-gradient(135deg,#1B1E29,#242A38)">
+          <span class="prop-index mono">02</span>
+          <svg viewBox="0 0 100 100" fill="none">
+            <rect x="30" y="20" width="40" height="65" stroke="#C0913F" stroke-width="1.3"/>
+            <path d="M30 85H70" stroke="#B25D3B" stroke-width="1"/>
+            <line x1="38" y1="30" x2="38" y2="78" stroke="#8C6A32" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <line x1="50" y1="30" x2="50" y2="78" stroke="#8C6A32" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <line x1="62" y1="30" x2="62" y2="78" stroke="#8C6A32" stroke-width="0.6" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+        <div class="prop-body">
+          <div class="prop-loc">Maitama, Abuja</div>
+          <h3>Royal Gardens Apartment</h3>
+          <div class="prop-specs">
+            <span class="mono">3 BD</span>
+            <span class="mono">4 BA</span>
+            <span class="mono">310 sqm</span>
+          </div>
+          <div class="prop-price mono">₦85,000,000</div>
+          <div class="prop-actions">
+            <button class="link-btn" data-toggle="detail-2" aria-expanded="false">View Details</button>
+          </div>
+        </div>
+        <div class="prop-detail" id="detail-2">
+          <div class="prop-detail-inner">
+            <p>A three-bedroom apartment inside a gated Maitama estate, favoured by diplomats and executives for its discretion and central location.</p>
+            <ul class="feats">
+              <li>Gated estate, single entry</li>
+              <li>Backup power (24hr)</li>
+              <li>Resident gym access</li>
+              <li>Reserved parking (2)</li>
+              <li>Landscaped courtyard</li>
+              <li>10 min to Central District</li>
+            </ul>
+            <button class="link-btn" data-enquire="Royal Gardens Apartment, Maitama (₦85,000,000)">Enquire About This Property →</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property 3 -->
+      <article class="prop-card">
+        <div class="prop-visual" style="--pattern:linear-gradient(135deg,#1B1E29,#2C2436)">
+          <span class="prop-index mono">03</span>
+          <svg viewBox="0 0 100 100" fill="none">
+            <path d="M20 75L20 45L50 25L80 45V75Z" stroke="#C0913F" stroke-width="1.3"/>
+            <path d="M20 75H80" stroke="#B25D3B" stroke-width="1"/>
+            <rect x="42" y="55" width="16" height="20" stroke="#8C6A32" stroke-width="0.8"/>
+            <circle cx="50" cy="15" r="3" stroke="#D8AC5C" stroke-width="1"/>
+            <line x1="50" y1="18" x2="50" y2="25" stroke="#8C6A32" stroke-width="0.6"/>
+          </svg>
+        </div>
+        <div class="prop-body">
+          <div class="prop-loc">GRA, Port Harcourt</div>
+          <h3>Executive Villa</h3>
+          <div class="prop-specs">
+            <span class="mono">6 BD</span>
+            <span class="mono">7 BA</span>
+            <span class="mono">890 sqm</span>
+          </div>
+          <div class="prop-price mono">₦300,000,000</div>
+          <div class="prop-actions">
+            <button class="link-btn" data-toggle="detail-3" aria-expanded="false">View Details</button>
+          </div>
+        </div>
+        <div class="prop-detail" id="detail-3">
+          <div class="prop-detail-inner">
+            <p>A six-bedroom smart villa in Port Harcourt's Government Reserved Area, built for full-time residence or high-end corporate hosting.</p>
+            <ul class="feats">
+              <li>Full smart-home system</li>
+              <li>Guest wing (self-contained)</li>
+              <li>Landscaped gardens</li>
+              <li>Borehole + treatment plant</li>
+              <li>Solar backup</li>
+              <li>4-car garage</li>
+            </ul>
+            <button class="link-btn" data-enquire="Executive Villa, GRA Port Harcourt (₦300,000,000)">Enquire About This Property →</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Why buyers work with Prime Haven</h2>
+        <p>Every listing passes the same standard before it reaches you.</p>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="about-card">
+        <span class="num mono">01</span>
+        <h3>Verified titles</h3>
+        <p>Every property is checked against official land records before it's listed — no surprises after you've committed.</p>
+      </div>
+      <div class="about-card">
+        <span class="num mono">02</span>
+        <h3>Direct guidance</h3>
+        <p>You deal with one dedicated agent from first enquiry to final handover, not a rotating call centre.</p>
+      </div>
+      <div class="about-card">
+        <span class="num mono">03</span>
+        <h3>Honest valuation</h3>
+        <p>Pricing is benchmarked against comparable sales in the area, so you know exactly what you're paying for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <h2>Let's find your<br>next address.</h2>
+      <p>Tell us what you're looking for and a Prime Haven agent will respond within 48 hours.</p>
+      <div class="contact-detail">
+        <span class="k">Email</span>
+        <span class="v">hello@primehavenrealty.com</span>
+      </div>
+      <div class="contact-detail">
+        <span class="k">Phone</span>
+        <span class="v">+234 800 000 0000</span>
+      </div>
+      <div class="contact-detail">
+        <span class="k">Offices</span>
+        <span class="v">Lagos · Abuja · Port Harcourt</span>
+      </div>
+    </div>
+
+    <form id="enquiryForm" action="https://formspree.io/f/xaqrjzkj" method="POST">
+      <div class="row2">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="field">
+        <label for="property">Property of interest</label>
+        <select id="property" name="property">
+          <option>Ocean View Residence, Lekki (₦250,000,000)</option>
+          <option>Royal Gardens Apartment, Maitama (₦85,000,000)</option>
+          <option>Executive Villa, GRA Port Harcourt (₦300,000,000)</option>
+          <option>General enquiry / not sure yet</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell us your budget, timeline, or any questions..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Enquiry</button>
+      <p class="form-note">Submissions are sent directly to our team — we typically respond within 48 hours.</p>
+      <p class="form-status" id="formStatus"></p>
+    </form>
+  </div>
 </section>
 
 <footer>
-<p>© 2026 Prime Haven Realty</p>
+  <div class="wrap foot-row">
+    <span>© 2026 Prime Haven Realty. All rights reserved.</span>
+    <span><a href="#properties">Properties</a> &nbsp;·&nbsp; <a href="#contact">Contact</a></span>
+  </div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // property detail toggles
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById(btn.dataset.toggle);
+      const open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      btn.textContent = open ? 'Hide Details' : 'View Details';
+    });
+  });
+
+  // enquire buttons scroll to form and prefill property
+  document.querySelectorAll('[data-enquire]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const propSelect = document.getElementById('property');
+      const value = btn.dataset.enquire;
+      for (const opt of propSelect.options) {
+        if (opt.value === value) { propSelect.value = value; break; }
+      }
+      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+      document.getElementById('name').focus({preventScroll:true});
+    });
+  });
+
+  // form submit via fetch so we can show inline status (works with Formspree)
+  const form = document.getElementById('enquiryForm');
+  const status = document.getElementById('formStatus');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = 'form-status show';
+    status.textContent = 'Sending...';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        status.textContent = "Thank you — your enquiry has been sent. We'll be in touch within 48 hours.";
+        status.className = 'form-status show ok';
+        form.reset();
+      } else {
+        throw new Error('Form endpoint not connected yet');
+      }
+    } catch (err) {
+      status.textContent = "This demo form isn't connected to an inbox yet — see the note below on activating it.";
+      status.className = 'form-status show err';
+    }
+  });
+</script>
 
 </body>
 </html>
