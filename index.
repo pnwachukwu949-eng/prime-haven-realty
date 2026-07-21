@@ -1,0 +1,94 @@
+<!-- Example of a single property card layout updated for the U.S. Market -->
+<div class="property-card">
+    <img src="luxury-villa.jpg" alt="Modern Luxury Home" class="property-img">
+    <div class="property-details">
+        <h3 class="property-title">The Grandview Estate</h3>
+        <!-- Premium US Neighborhood and ZIP formatting -->
+        <p class="property-location"><i class="fas fa-map-marker-alt"></i> 1402 Bel Air Rd, Los Angeles, CA 90077</p>
+        
+        <div class="property-specs">
+            <span><i class="fas fa-bed"></i> 5 Beds</span>
+            <span><i class="fas fa-bath"></i> 6 Baths</span>
+            <span><i class="fas fa-ruler-combined"></i> 5,400 Sq Ft</span>
+        </div>
+        
+        <!-- Standard US Currency Layout -->
+        <div class="property-price-row">
+            <span class="property-price">$4,250,000</span>
+            <a href="https://wa.me" class="btn-inquire" target="_blank">Inquire</a>
+        </div>
+    </div>
+</div>
+<section id="contact-agent" class="contact-section">
+    <div class="contact-container">
+        <h2>Schedule a Private Showing</h2>
+        <p>Looking to buy or sell? Get a complimentary, no-obligation market evaluation.</p>
+        
+        <!-- Replace the action URL with your client's email form endpoint -->
+        <form action="https://formspree.io" method="POST" class="lead-form">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" name="phone" placeholder="Phone Number (e.g., +1 555-0199)" required>
+            </div>
+            <div class="form-group">
+                <select name="intent" required>
+                    <option value="" disabled selected>I am looking to...</option>
+                    <option value="buy">Buy a New Home</option>
+                    <option value="sell">Sell My Property</option>
+                    <option value="invest">Invest in Real Estate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea name="message" placeholder="Property of interest or special requirements..." rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Submit Request</button>
+        </form>
+    </div>
+</section>
+/* Clean styles optimized for luxury real estate themes */
+.contact-section {
+    background-color: #1a1e21; /* Rich dark background */
+    color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.lead-form {
+    max-width: 500px;
+    margin: 30px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    background-color: #c5a880; /* Premium Champagne Gold Accent */
+    color: #fff;
+    padding: 14px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #b0926a;
+}
